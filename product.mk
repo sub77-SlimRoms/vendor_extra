@@ -16,15 +16,6 @@ PRODUCT_PACKAGES += \
     LockClock \
     OpenDelta
 
-# Boot Animation
-ifneq (du_falcon,$(TARGET_PRODUCT))
-    PRODUCT_COPY_FILES += \
-        vendor/extra/prebuilt/falcon/media/bootanimation.zip:system/media/bootanimation.zip
-elseif
-    PRODUCT_COPY_FILES += \
-        vendor/extra/prebuilt/common/media/bootanimation.zip:system/media/bootanimation.zip
-endif
-
 ########################################
 ############# Settings #################
 ########################################
