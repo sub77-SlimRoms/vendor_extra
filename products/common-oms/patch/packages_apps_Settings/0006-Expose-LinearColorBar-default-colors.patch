@@ -1,7 +1,7 @@
-From 247befc2a4fb0e7c51f297b1a28c765a24734b14 Mon Sep 17 00:00:00 2001
+From 05116d3b462184d8dbc3e3dbb7975d0fa9b76f4d Mon Sep 17 00:00:00 2001
 From: SpiritCroc <spiritcroc@gmail.com>
 Date: Fri, 9 Dec 2016 12:47:54 +0100
-Subject: [PATCH 7/8] Expose LinearColorBar default colors
+Subject: [PATCH 6/8] Expose LinearColorBar default colors
 
 Change-Id: I8e63f10f9e4079d1a03eaece18e8343102f4a755
 Signed-off-by: sub77 <sub77@ymail.com>

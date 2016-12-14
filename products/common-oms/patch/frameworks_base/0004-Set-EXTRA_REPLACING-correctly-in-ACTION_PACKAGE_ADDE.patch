@@ -1,7 +1,7 @@
-From 64fd6a224426668f8d7dd4bffeb1207790535d26 Mon Sep 17 00:00:00 2001
+From 0fd6730d18ca1c21b9177e70a66ceeb47fae7cac Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?M=C3=A5rten=20Kongstad?= <marten.kongstad@sonymobile.com>
 Date: Mon, 25 Apr 2016 16:29:22 +0200
-Subject: [PATCH 04/26] Set EXTRA_REPLACING correctly in ACTION_PACKAGE_ADDED
+Subject: [PATCH 04/24] Set EXTRA_REPLACING correctly in ACTION_PACKAGE_ADDED
  [4/11]
 
 When broadcasting ACTION_PACKAGE_ADDED the recipients of the Intent are
@@ -36,10 +36,10 @@ Signed-off-by: sub77 <sub77@ymail.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
-index 0ad2a0e..feeb5e4 100644
+index fcc922c..805780c 100755
 --- a/services/core/java/com/android/server/pm/PackageManagerService.java
 +++ b/services/core/java/com/android/server/pm/PackageManagerService.java
-@@ -1693,6 +1693,7 @@ public class PackageManagerService extends IPackageManager.Stub {
+@@ -1704,6 +1704,7 @@ public class PackageManagerService extends IPackageManager.Stub {
  
                  // Send added for users that don't see the package for the first time
                  if (update) {

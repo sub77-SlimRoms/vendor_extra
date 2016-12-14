@@ -1,7 +1,7 @@
-From 5c4978444af65a9ff87ab2eefbd0ef878a223484 Mon Sep 17 00:00:00 2001
+From 952b581fa8e89a5d0cee636c61e3a0bbead85bf4 Mon Sep 17 00:00:00 2001
 From: George G <kreach3r@users.noreply.github.com>
 Date: Tue, 3 Nov 2015 23:57:22 +0200
-Subject: [PATCH 4/8] Expose storage summary text
+Subject: [PATCH 3/8] Expose storage summary text
 
 This commit simply exposes the storage summary text hardcodes to allow
 themers to theme them without issue.

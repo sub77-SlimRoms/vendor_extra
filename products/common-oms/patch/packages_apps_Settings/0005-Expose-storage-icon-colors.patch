@@ -1,7 +1,7 @@
-From 5e7286c28309e685b26c24d422414f68f7981eaa Mon Sep 17 00:00:00 2001
+From a7e0a99ba29b9e5c807e33c47716941737ee7d84 Mon Sep 17 00:00:00 2001
 From: SpiritCroc <spiritcroc@gmail.com>
 Date: Thu, 8 Dec 2016 20:40:16 +0100
-Subject: [PATCH 6/8] Expose storage icon colors
+Subject: [PATCH 5/8] Expose storage icon colors
 
 Change-Id: I97ce427f0683791670f1bbf82eaef66152fe4961
 Signed-off-by: sub77 <sub77@ymail.com>

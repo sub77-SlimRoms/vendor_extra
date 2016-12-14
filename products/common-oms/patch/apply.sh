@@ -3,7 +3,7 @@ build_root=$(pwd)
 echo -e ""
 echo -e ${CL_RED}"Applying patches"${CL_RST}
 echo -e ${CL_RST}"----------------"${CL_RST}
-patches_path="$build_root/vendor/extra/products/oms/patch/"
+patches_path="$build_root/vendor/extra/products/common-oms/patch/"
 pushd "$patches_path" > /dev/null
 unset repos
 for patch in `find -type f -name '*.patch'|cut -d / -f 2-|sort`; do
@@ -13,7 +13,7 @@ for patch in `find -type f -name '*.patch'|cut -d / -f 2-|sort`; do
     # Supported both path/to/repo_with_underlines/file.patch and path_to_repo+with+underlines/file.patch (both leads to path/to/repo_with_underlines)
     repo_to_patch="$(if dirname $patch|grep -q /; then dirname $patch; else dirname $patch |tr '_' '/'|tr '+' '_'; fi)"
 
-    echo -e ${CL_BLU}" --> Is $repo_to_patch patched for '$title' ?.. "${CL_RST}
+    echo -e " --> Is ${CL_YLW} $repo_to_patch ${CL_RST} patched for '$title' ?.. "
 
         if [ ! -d $build_root/$repo_to_patch ] ; then
                 echo "$repo_to_patch NOT EXIST! Go away and check your manifests. Skipping this patch."
@@ -47,12 +47,12 @@ for patch in `find -type f -name '*.patch'|cut -d / -f 2-|sort`; do
     else
         echo No
         echo -e ${CL_GRN}"Trying to apply patch $(basename "$patch") to '$repo_to_patch'"${CL_RST}
-        if ! git am $absolute_patch_path; then
-            echo -e ${CL_RED}"Failed, aborting git am"${CL_RST}
+        if ! git am -3 $absolute_patch_path; then
+            echo -e ${CL_RED}"Failed, aborting git am -3"${CL_RST}
             git am --abort
-                echo -e ${CL_RED}"Retry git am -3"${CL_RST}
-                    if ! git am -3 $absolute_patch_path; then
-                        echo -e ${CL_RED}"Failed -3, aborting git am"${CL_RST}
+                echo -e ${CL_RED}"Retry git am"${CL_RST}
+                    if ! git am $absolute_patch_path; then
+                        echo -e ${CL_RED}"Failed, aborting git am"${CL_RST}
                         git am --abort
                     fi
         fi

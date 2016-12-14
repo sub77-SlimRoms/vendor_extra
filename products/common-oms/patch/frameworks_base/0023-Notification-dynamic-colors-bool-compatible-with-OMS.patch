@@ -1,0 +1,151 @@
+From f5569372eb3d6ed5e91dc5f42f5a5e8692aad2ae Mon Sep 17 00:00:00 2001
+From: George G <kreach3r@users.noreply.github.com>
+Date: Mon, 14 Nov 2016 14:49:47 +0200
+Subject: [PATCH 23/24] Notification dynamic colors bool compatible with OMS7
+ [2/2]
+
+OMS7 introduced this fine piece of code:
+https://github.com/SubstratumResources/platform_frameworks_base/blob/n-oms7/core/java/android/app/ResourcesManager.java#L897..#L904
+
+// Resources.getSystem Resources are created on request and aren't tracked by
+// mResourceReferences.
+//
+// If overlays targeting "android" are to be used, we must create the system
+// resources regardless of whether they already exist, since otherwise the
+// information on what overlays to use would be lost. This is wasteful for most
+// applications, so limit this operation to the system user only. (This means
+// Resources.getSystem() will *not* use overlays for applications.)
+
+Replaced deprecated Resources.getSystem() with compatible method.
+
+Change-Id: I02efe27de3cc7067552964ffbaf079f9e9b5bc3e
+Signed-off-by: sub77 <sub77@ymail.com>
+---
+ core/java/android/app/Notification.java | 23 ++++++++++++++++++++---
+ core/res/res/values/colors.xml          | 10 +++++++++-
+ core/res/res/values/du_colors.xml       | 24 ------------------------
+ 3 files changed, 29 insertions(+), 28 deletions(-)
+ delete mode 100644 core/res/res/values/du_colors.xml
+
+diff --git a/core/java/android/app/Notification.java b/core/java/android/app/Notification.java
+index 0dd9c63..8d43123 100644
+--- a/core/java/android/app/Notification.java
++++ b/core/java/android/app/Notification.java
+@@ -29,6 +29,7 @@ import android.content.pm.ApplicationInfo;
+ import android.content.pm.PackageManager;
+ import android.content.pm.PackageManager.NameNotFoundException;
+ import android.content.res.ColorStateList;
++import android.content.res.Resources;
+ import android.graphics.Bitmap;
+ import android.graphics.Canvas;
+ import android.graphics.Color;
+@@ -3877,7 +3878,7 @@ public class Notification implements Parcelable
+         private void processSmallIconColor(Icon smallIcon, RemoteViews contentView) {
+             boolean colorable = !isLegacy() || getColorUtil().isGrayscaleIcon(mContext, smallIcon);
+             if (colorable) {
+-                contentView.setDrawableParameters(R.id.icon, false, -1, resolveContrastColor(),
++                contentView.setDrawableParameters(R.id.icon, false, -1, resolveIconContrastColor(),
+                         PorterDuff.Mode.SRC_ATOP, -1);
+ 
+             }
+@@ -3894,7 +3895,7 @@ public class Notification implements Parcelable
+             if (largeIcon != null && isLegacy()
+                     && getColorUtil().isGrayscaleIcon(mContext, largeIcon)) {
+                 // resolve color will fall back to the default when legacy
+-                contentView.setDrawableParameters(R.id.icon, false, -1, resolveContrastColor(),
++                contentView.setDrawableParameters(R.id.icon, false, -1, resolveIconContrastColor(),
+                         PorterDuff.Mode.SRC_ATOP, -1);
+             }
+         }
+@@ -3905,7 +3906,23 @@ public class Notification implements Parcelable
+             }
+         }
+ 
++        int getSenderTextColor() {
++            return mContext.getColor(R.color.sender_text_color);
++        }
++
++        int resolveIconContrastColor() {
++            if (!Resources.getSystem().getBoolean(R.bool.config_allowNotificationIconTextTinting)) {
++                return mContext.getColor(R.color.notification_icon_default_color);
++            } else {
++                return resolveContrastColor();
++            }
++        }
++
+         int resolveContrastColor() {
++            if (!Resources.getSystem().getBoolean(R.bool.config_allowNotificationIconTextTinting)) {
++                return mContext.getColor(R.color.notification_text_default_color);
++            }
++
+             if (mCachedContrastColorIsFor == mN.color && mCachedContrastColor != COLOR_INVALID) {
+                 return mCachedContrastColor;
+             }
+@@ -4908,7 +4925,7 @@ public class Notification implements Parcelable
+                         0 /* flags */);
+             } else {
+                 sb.append(bidi.unicodeWrap(m.mSender),
+-                        makeFontColorSpan(Color.BLACK),
++                        makeFontColorSpan(mBuilder.getSenderTextColor()),
+                         0 /* flags */);
+             }
+             CharSequence text = m.mText == null ? "" : m.mText;
+diff --git a/core/res/res/values/colors.xml b/core/res/res/values/colors.xml
+index de86cef..c2c722a 100644
+--- a/core/res/res/values/colors.xml
++++ b/core/res/res/values/colors.xml
+@@ -88,7 +88,7 @@
+     <color name="perms_dangerous_perm_color">#33b5e5</color>
+     <color name="shadow">#cc222222</color>
+     <color name="perms_costs_money">#fff4511e</color>
+-    
++
+     <!-- For search-related UIs -->
+     <color name="search_url_text_normal">#7fa87f</color>
+     <color name="search_url_text_selected">@android:color/black</color>
+@@ -186,4 +186,12 @@
+ 
+     <color name="resize_shadow_start_color">#2a000000</color>
+     <color name="resize_shadow_end_color">#00000000</color>
++
++    <color name="resolver_list_bg">@color/white</color>
++    <color name="immersive_cling_bg_color">@color/accent_device_default_light</color>
++    <color name="immersive_cling_text_color">@color/primary_text_default_material_light</color>
++    <color name="immersive_cling_button_text_color">@android:color/white</color>
++    <color name="app_permission_icon_tint">@android:color/black</color>
++    <color name="notification_text_default_color">@android:color/notification_default_color</color>
++    <color name="sender_text_color">@android:color/black</color>
+ </resources>
+diff --git a/core/res/res/values/du_colors.xml b/core/res/res/values/du_colors.xml
+deleted file mode 100644
+index a7316ab..0000000
+--- a/core/res/res/values/du_colors.xml
++++ /dev/null
+@@ -1,24 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<!--
+-    Copyright (c) 2016 Projekt Substratum
+-
+-    Licensed under the Apache License, Version 2.0 (the "License");
+-    you may not use this file except in compliance with the License.
+-    You may obtain a copy of the License at
+-
+-        http://www.apache.org/licenses/LICENSE-2.0
+-
+-    Unless required by applicable law or agreed to in writing, software
+-    distributed under the License is distributed on an "AS IS" BASIS,
+-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+-    See the License for the specific language governing permissions and
+-    limitations under the License.
+--->
+-
+-<resources>
+-    <color name="resolver_list_bg">@color/white</color>
+-    <color name="immersive_cling_bg_color">@color/accent_device_default_light</color>
+-    <color name="immersive_cling_text_color">@color/primary_text_default_material_light</color>
+-    <color name="immersive_cling_button_text_color">@android:color/white</color>
+-    <color name="app_permission_icon_tint">@android:color/black</color>
+-</resources>
+-- 
+2.1.4
+

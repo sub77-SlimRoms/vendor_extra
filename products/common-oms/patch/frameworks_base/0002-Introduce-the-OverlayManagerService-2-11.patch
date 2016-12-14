@@ -1,7 +1,7 @@
-From c78da5315c1059dea7e74bab6ceceaff447226e6 Mon Sep 17 00:00:00 2001
+From 8b1a9d5507faac5e0b9297e1025cdf5bacc50ae2 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?M=C3=A5rten=20Kongstad?= <marten.kongstad@sonymobile.com>
 Date: Tue, 15 Dec 2015 16:40:23 +0100
-Subject: [PATCH 02/26] Introduce the OverlayManagerService [2/11]
+Subject: [PATCH 02/24] Introduce the OverlayManagerService [2/11]
 
 Add a new system service to manage Runtime Resource Overlays. This will
 offload the PackageManagerService and allow administration of overlay
@@ -85,10 +85,10 @@ Signed-off-by: sub77 <sub77@ymail.com>
  create mode 100644 services/core/java/com/android/server/om/OverlayManagerShellCommand.java
 
 diff --git a/Android.mk b/Android.mk
-index 2719d516..519a95f 100644
+index ab4de3e..d667c15 100644
 --- a/Android.mk
 +++ b/Android.mk
-@@ -136,6 +136,7 @@ LOCAL_SRC_FILES += \
+@@ -137,6 +137,7 @@ LOCAL_SRC_FILES += \
  	core/java/android/content/ISyncContext.aidl \
  	core/java/android/content/ISyncServiceAdapter.aidl \
  	core/java/android/content/ISyncStatusObserver.aidl \
@@ -118,10 +118,10 @@ index 3a2f471..1ca44e0 100644
       * process and user ID running in the system.
       *
 diff --git a/core/java/android/content/Intent.java b/core/java/android/content/Intent.java
-index fe7140a..6442afe 100644
+index c6aaa48..1d74ee9 100644
 --- a/core/java/android/content/Intent.java
 +++ b/core/java/android/content/Intent.java
-@@ -3091,6 +3091,40 @@ public class Intent implements Parcelable, Cloneable {
+@@ -3076,6 +3076,40 @@ public class Intent implements Parcelable, Cloneable {
              "android.intent.action.MEDIA_RESOURCE_GRANTED";
  
      /**
@@ -652,7 +652,7 @@ index f5bcf64..bdbdd1e 100644
 +    public abstract void setResourceDirs(int userId, String packageName, String[] resourceDirs);
  }
 diff --git a/core/res/AndroidManifest.xml b/core/res/AndroidManifest.xml
-index 430c6b6..d942c1b 100644
+index 1770ce4..7151722 100644
 --- a/core/res/AndroidManifest.xml
 +++ b/core/res/AndroidManifest.xml
 @@ -82,6 +82,10 @@
@@ -3027,10 +3027,10 @@ index 0000000..d6f5373
 +    }
 +}
 diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
-index 5fd9c58..01ea3ee 100644
+index 8443473..72f6bcd 100755
 --- a/services/core/java/com/android/server/pm/PackageManagerService.java
 +++ b/services/core/java/com/android/server/pm/PackageManagerService.java
-@@ -21080,6 +21080,47 @@ Slog.v(TAG, ":: stepped forward, applying functor at tag " + parser.getName());
+@@ -21192,6 +21192,47 @@ Slog.v(TAG, ":: stepped forward, applying functor at tag " + parser.getName());
                  return mSettings.wasPackageEverLaunchedLPr(packageName, userId);
              }
          }

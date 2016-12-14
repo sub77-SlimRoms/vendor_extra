@@ -1,7 +1,7 @@
-From 5563ea17f7c2a49b8c7d909552ee2ffcbc7b2994 Mon Sep 17 00:00:00 2001
+From 46797460e3965636c70b0bef76561cfa411e4762 Mon Sep 17 00:00:00 2001
 From: Ivan Iskandar <iiiiskandar14@gmail.com>
 Date: Sun, 18 Sep 2016 10:12:05 +0700
-Subject: [PATCH 2/8] Expose dashboard category and tile color
+Subject: [PATCH 1/8] Expose dashboard category and tile color
 
 Change-Id: Ia9c83eb9b8360923ed52e03641b4179681a80330
 Signed-off-by: sub77 <sub77@ymail.com>

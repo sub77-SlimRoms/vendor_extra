@@ -1,7 +1,7 @@
-From 9f109c70958057067500f6065d7b06702336c005 Mon Sep 17 00:00:00 2001
-From: George G <kreach3r@users.noreply.github.com>
-Date: Mon, 4 Jul 2016 12:07:11 +0300
-Subject: [PATCH 8/8] Add filter for Substratum overlays [2/2]
+From 008b82716adb4ae9934a559942a8e6b3875f5b2d Mon Sep 17 00:00:00 2001
+From: sub77 <sub77@ymail.com>
+Date: Wed, 14 Dec 2016 23:33:50 +0000
+Subject: [PATCH 7/8] Add filter for Substratum overlays [2/2]
 
 Default behavior is "hidden" substratum overlays,
 as they pollute the screen, and you can't notice the
@@ -13,7 +13,7 @@ Change-Id: I1cd4d4d3acd767a87fe402c325a872a4c04e0438
 Signed-off-by: sub77 <sub77@ymail.com>
 ---
  res/menu/manage_apps.xml                           |  8 +++++++
- res/values/du_strings.xml                          |  5 ++++
+ res/values/slim_strings.xml                        |  5 ++++
  .../settings/applications/ManageApplications.java  | 27 +++++++++++++++++++++-
  3 files changed, 39 insertions(+), 1 deletion(-)
 
@@ -36,13 +36,13 @@ index 02ee2bb..67f09e5 100644
          android:id="@+id/sort_order_alpha"
          android:title="@string/sort_order_alpha"
          android:showAsAction="never" />
-diff --git a/res/values/du_strings.xml b/res/values/du_strings.xml
-index f8fc8b3..78924e2 100644
---- a/res/values/du_strings.xml
-+++ b/res/values/du_strings.xml
-@@ -193,4 +193,9 @@
-     <string name="themes_title">Themes</string>
-     <string name="themes_dashboard_summary">Manage Substratum themes</string>
+diff --git a/res/values/slim_strings.xml b/res/values/slim_strings.xml
+index 118bb53..479a4e0 100644
+--- a/res/values/slim_strings.xml
++++ b/res/values/slim_strings.xml
+@@ -21,4 +21,9 @@
+     <string name="advanced_reboot_hide_on_keyguard">Hide on lock screen</string>
+     <string name="advanced_reboot_show_always">Show always</string>
  
 +    <!-- Manage applications: show substratum overlays -->
 +    <string name="filter_substratum_apps">Substratum overlays</string>
@@ -51,7 +51,7 @@ index f8fc8b3..78924e2 100644
 +
  </resources>
 diff --git a/src/com/android/settings/applications/ManageApplications.java b/src/com/android/settings/applications/ManageApplications.java
-index 8355afd..e39119c 100644
+index 1594e23..63cf397 100644
 --- a/src/com/android/settings/applications/ManageApplications.java
 +++ b/src/com/android/settings/applications/ManageApplications.java
 @@ -107,6 +107,7 @@ public class ManageApplications extends InstrumentedFragment
@@ -88,7 +88,7 @@ index 8355afd..e39119c 100644
          }
  
          mInvalidSizeStr = getActivity().getText(R.string.invalid_size_value);
-@@ -441,6 +447,7 @@ public class ManageApplications extends InstrumentedFragment
+@@ -440,6 +446,7 @@ public class ManageApplications extends InstrumentedFragment
          mResetAppsHelper.onSaveInstanceState(outState);
          outState.putInt(EXTRA_SORT_ORDER, mSortOrder);
          outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
@@ -96,7 +96,7 @@ index 8355afd..e39119c 100644
          outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
          outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
      }
-@@ -559,6 +566,11 @@ public class ManageApplications extends InstrumentedFragment
+@@ -558,6 +565,11 @@ public class ManageApplications extends InstrumentedFragment
                  && mListType != LIST_TYPE_HIGH_POWER);
          mOptionsMenu.findItem(R.id.hide_system).setVisible(mShowSystem
                  && mListType != LIST_TYPE_HIGH_POWER);
@@ -108,7 +108,7 @@ index 8355afd..e39119c 100644
      }
  
      @Override
-@@ -578,6 +590,11 @@ public class ManageApplications extends InstrumentedFragment
+@@ -577,6 +589,11 @@ public class ManageApplications extends InstrumentedFragment
                  mShowSystem = !mShowSystem;
                  mApplications.rebuild(false);
                  break;
@@ -120,7 +120,7 @@ index 8355afd..e39119c 100644
              case R.id.reset_app_preferences:
                  mResetAppsHelper.buildResetDialog();
                  return true;
-@@ -866,9 +883,17 @@ public class ManageApplications extends InstrumentedFragment
+@@ -865,9 +882,17 @@ public class ManageApplications extends InstrumentedFragment
              if (mOverrideFilter != null) {
                  filterObj = mOverrideFilter;
              }

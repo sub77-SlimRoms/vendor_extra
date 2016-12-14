@@ -16,7 +16,7 @@ if [ ! "$BUILD_WITH_COLORS" = "0" ]; then
 fi
 
 #PATCHING COMMON
-for f in `test -d vendor && find -L vendor/extra/products/common/patch -maxdepth 1 -name 'apply.sh' 2> /dev/null`
+for f in `test -d vendor && find -L vendor/extra/products/common-*/patch -maxdepth 1 -name 'apply.sh' 2> /dev/null`
 do
     echo " "
     echo "Patching common-tree -> $f"

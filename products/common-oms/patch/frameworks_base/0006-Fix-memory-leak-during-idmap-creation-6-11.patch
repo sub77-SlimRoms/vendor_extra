@@ -1,7 +1,7 @@
-From f519ec81a5d6d6d76059d6645d89e7c8c8971640 Mon Sep 17 00:00:00 2001
+From 9dc49d3f35b5afc6525b16ec4897efe745308b77 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?M=C3=A5rten=20Kongstad?= <marten.kongstad@sonymobile.com>
 Date: Thu, 2 Jun 2016 09:34:36 +0200
-Subject: [PATCH 06/26] Fix memory leak during idmap creation [6/11]
+Subject: [PATCH 06/24] Fix memory leak during idmap creation [6/11]
 
 Plug a memory leak in AssetManager::createIdmap.
 
@@ -12,10 +12,10 @@ Signed-off-by: sub77 <sub77@ymail.com>
  1 file changed, 25 insertions(+), 13 deletions(-)
 
 diff --git a/libs/androidfw/AssetManager.cpp b/libs/androidfw/AssetManager.cpp
-index 214c0d1..c0690af 100644
+index b961890..814f718 100644
 --- a/libs/androidfw/AssetManager.cpp
 +++ b/libs/androidfw/AssetManager.cpp
-@@ -290,22 +290,34 @@ bool AssetManager::createIdmap(const char* targetApkPath, const char* overlayApk
+@@ -291,22 +291,34 @@ bool AssetManager::createIdmap(const char* targetApkPath, const char* overlayApk
  {
      AutoMutex _l(mLock);
      const String8 paths[2] = { String8(targetApkPath), String8(overlayApkPath) };

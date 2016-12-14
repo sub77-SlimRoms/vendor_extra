@@ -1,7 +1,7 @@
-From 3b50e421246e229fa04e42daca060b4d18f363a9 Mon Sep 17 00:00:00 2001
+From dd562f941f4c5aaa68365c9bdbe1392b74636a53 Mon Sep 17 00:00:00 2001
 From: George G <kreach3r@users.noreply.github.com>
 Date: Mon, 4 Jul 2016 06:25:15 +0300
-Subject: [PATCH 15/26] Add filter for Substratum overlays [1/2]
+Subject: [PATCH 15/24] Add filter for Substratum overlays [1/2]
 
 This commit allows the framework to handle the filtering of the
 overlays found for OMS.
