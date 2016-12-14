@@ -1,6 +1,6 @@
 build_root=$(pwd)
 
-echo -e ""
+#echo -e ""
 echo -e ${CL_RED}"Applying patches"${CL_RST}
 echo -e ${CL_RST}"----------------"${CL_RST}
 patches_path="$build_root/vendor/extra/products/common/patch/"
@@ -62,3 +62,4 @@ done
 popd > /dev/null
 echo -e ${CL_RST}"----------------"${CL_RST}
 echo -e ${CL_GRN}"Applying patches: done"${CL_RST}
+echo " "
