@@ -1,10 +1,10 @@
 # CCACHE
 export USE_CCACHE=1
-export CCACHE_DIR=./ccache
+export CCACHE_DIR=/1and/ccache/SlimRoms
 ccache -M 15G
 
 #PATCHING COMMON
-for f in `test -d vendor && find -L vendor/extra/products/common-*/patch -maxdepth 1 -name 'apply.sh' 2> /dev/null`
+for f in `test -d vendor && find -L vendor/extra/products/common*/patch -maxdepth 1 -name 'apply.sh' 2> /dev/null`
 do
     echo " "
     echo "Patching common-tree -> $f"
@@ -18,6 +18,7 @@ function patchdevicetree()
 {
 for f in `test -d device && find -L device/$SLIM_BUILD/patch -maxdepth 4 -name 'apply.sh' 2> /dev/null`
 do
+    echo " "
     echo "Patching device-tree -> $f"
     echo " "
     . $f
