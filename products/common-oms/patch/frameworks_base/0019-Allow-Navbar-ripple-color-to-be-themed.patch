@@ -1,7 +1,7 @@
-From 6d842127be33f8d56f1f4c03cd9c5c600f591703 Mon Sep 17 00:00:00 2001
+From 16817c5adb546ab9751b30cb4a2aae965b3928d7 Mon Sep 17 00:00:00 2001
 From: Dave Kover <dkover@cyngn.com>
 Date: Thu, 14 Apr 2016 10:19:13 +0700
-Subject: [PATCH 19/24] Allow Navbar ripple color to be themed
+Subject: [PATCH 19/29] Allow Navbar ripple color to be themed
 
 PS1:
 Layers Commit by @setiawanjimmy

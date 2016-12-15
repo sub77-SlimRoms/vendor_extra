@@ -1,7 +1,7 @@
-From 9dc49d3f35b5afc6525b16ec4897efe745308b77 Mon Sep 17 00:00:00 2001
+From c2926337036fc78f50f22cb8b08c38433071128d Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?M=C3=A5rten=20Kongstad?= <marten.kongstad@sonymobile.com>
 Date: Thu, 2 Jun 2016 09:34:36 +0200
-Subject: [PATCH 06/24] Fix memory leak during idmap creation [6/11]
+Subject: [PATCH 06/29] Fix memory leak during idmap creation [6/11]
 
 Plug a memory leak in AssetManager::createIdmap.
 

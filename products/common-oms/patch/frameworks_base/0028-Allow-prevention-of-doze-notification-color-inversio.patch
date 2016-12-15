@@ -1,0 +1,39 @@
+From ec4e81a17465745677002d2e517ecfe6a9a84182 Mon Sep 17 00:00:00 2001
+From: sub77 <sub77@ymail.com>
+Date: Thu, 15 Dec 2016 02:54:28 +0000
+Subject: [PATCH 28/29] Allow prevention of doze notification color inversion
+
+Removed empty newline at the end -- KreAch3R
+Removed slims files for aosp roms -- Bgill55
+
+Change-Id: I911f65197c136e8866685811bb904911f4b2c466
+Signed-off-by: sub77 <sub77@ymail.com>
+---
+ packages/SystemUI/src/com/android/systemui/ViewInvertHelper.java | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/packages/SystemUI/src/com/android/systemui/ViewInvertHelper.java b/packages/SystemUI/src/com/android/systemui/ViewInvertHelper.java
+index 2c96e31..65fd115 100644
+--- a/packages/SystemUI/src/com/android/systemui/ViewInvertHelper.java
++++ b/packages/SystemUI/src/com/android/systemui/ViewInvertHelper.java
+@@ -20,6 +20,7 @@ import android.animation.Animator;
+ import android.animation.AnimatorListenerAdapter;
+ import android.animation.ValueAnimator;
+ import android.content.Context;
++import android.content.res.Resources;
+ import android.graphics.ColorMatrix;
+ import android.graphics.ColorMatrixColorFilter;
+ import android.graphics.Paint;
+@@ -90,7 +91,8 @@ public class ViewInvertHelper {
+     }
+ 
+     public void update(boolean invert) {
+-        if (invert) {
++        if (invert && Resources.getSystem().getBoolean(
++                com.android.internal.R.bool.config_invert_colors_on_doze)) {
+             updateInvertPaint(1f);
+             for (int i = 0; i < mTargets.size(); i++) {
+                 mTargets.get(i).setLayerType(View.LAYER_TYPE_HARDWARE, mDarkPaint);
+-- 
+2.1.4
+

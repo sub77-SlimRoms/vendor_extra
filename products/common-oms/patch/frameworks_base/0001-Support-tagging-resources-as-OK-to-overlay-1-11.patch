@@ -1,7 +1,7 @@
-From a8dbf75440c38a145cbe131ea16d1c7b152d0df2 Mon Sep 17 00:00:00 2001
+From 82e52096bd0029a6b44427a8612756b7755a5260 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?M=C3=A5rten=20Kongstad?= <marten.kongstad@sonymobile.com>
 Date: Tue, 15 Dec 2015 16:08:31 +0100
-Subject: [PATCH 01/24] Support tagging resources as OK to overlay [1/11]
+Subject: [PATCH 01/29] Support tagging resources as OK to overlay [1/11]
 
 This will allow applications to have a resource xml defining what
 resources that are safe to overlay by third party overlay packages.

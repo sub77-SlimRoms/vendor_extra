@@ -1,7 +1,7 @@
-From e268fc3325791d769d9411316c1ce899c018d4b4 Mon Sep 17 00:00:00 2001
+From 34dc98f6dac9169028ce3b2560ae34f10a0cf2a3 Mon Sep 17 00:00:00 2001
 From: Ivan Iskandar <iiiiskandar14@gmail.com>
 Date: Sun, 18 Sep 2016 21:33:18 +0700
-Subject: [PATCH 20/24] Expose QS edit item decoration background color
+Subject: [PATCH 20/29] Expose QS edit item decoration background color
 
 PS2:
 More descriptive color name

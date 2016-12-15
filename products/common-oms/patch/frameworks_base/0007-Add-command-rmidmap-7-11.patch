@@ -1,7 +1,7 @@
-From f61a081c74b4011a337ac499ab2935533c261bd9 Mon Sep 17 00:00:00 2001
+From 81112ebed02af8e2e11108cfea205e4e46da2863 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?M=C3=A5rten=20Kongstad?= <marten.kongstad@sonymobile.com>
 Date: Thu, 2 Jun 2016 09:35:09 +0200
-Subject: [PATCH 07/24] Add command 'rmidmap' [7/11]
+Subject: [PATCH 07/29] Add command 'rmidmap' [7/11]
 
 Add an installd command to remove an idmap file. This is the inverse of
 the 'idmap' command and is intended for clean-up once an idmap file is

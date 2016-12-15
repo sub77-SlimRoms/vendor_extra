@@ -1,7 +1,7 @@
-From f5569372eb3d6ed5e91dc5f42f5a5e8692aad2ae Mon Sep 17 00:00:00 2001
+From 6964fb9752491249607ec7006a9f5ce0067365ad Mon Sep 17 00:00:00 2001
 From: George G <kreach3r@users.noreply.github.com>
 Date: Mon, 14 Nov 2016 14:49:47 +0200
-Subject: [PATCH 23/24] Notification dynamic colors bool compatible with OMS7
+Subject: [PATCH 23/29] Notification dynamic colors bool compatible with OMS7
  [2/2]
 
 OMS7 introduced this fine piece of code:

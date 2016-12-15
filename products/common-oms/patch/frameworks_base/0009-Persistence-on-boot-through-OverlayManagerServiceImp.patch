@@ -1,7 +1,7 @@
-From d632b0755cb57a8d3bddfdf7c8d0865a01af400a Mon Sep 17 00:00:00 2001
+From bb2c469a8b0f21bb06cf01c3b10406f1666e9ab8 Mon Sep 17 00:00:00 2001
 From: Nicholas Chum <nicholaschum@gmail.com>
 Date: Sun, 19 Jun 2016 10:37:13 -0400
-Subject: [PATCH 09/24] Persistence on boot through OverlayManagerServiceImpl
+Subject: [PATCH 09/29] Persistence on boot through OverlayManagerServiceImpl
  [9/11]
 
 Overlays should not be enforced by the traditional OverlayManagerService

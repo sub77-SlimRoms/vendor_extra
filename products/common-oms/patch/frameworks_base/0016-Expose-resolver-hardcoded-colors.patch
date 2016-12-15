@@ -1,7 +1,7 @@
-From df27eb839e995477715efab734a7eeadadd49aa2 Mon Sep 17 00:00:00 2001
+From afdf25438339d30221399963b00ddca1f630f11d Mon Sep 17 00:00:00 2001
 From: Nathan Chancellor <natechancellor@gmail.com>
 Date: Fri, 9 Dec 2016 10:47:17 -0700
-Subject: [PATCH 16/24] Expose resolver hardcoded colors
+Subject: [PATCH 16/29] Expose resolver hardcoded colors
 
 commit dbbd5e70cc65002df41561474b03362022dd6716
 Author: Dave Kover <dkover@cyngn.com>

@@ -1,0 +1,105 @@
+From 2c285535e30a5681390e4710ce745d356f5387a6 Mon Sep 17 00:00:00 2001
+From: sub77 <sub77@ymail.com>
+Date: Thu, 15 Dec 2016 02:40:29 +0000
+Subject: [PATCH 26/29] DIRTY FIXES
+
+Change-Id: I7c8e67082dd856c2f3ee868beac274297c6c3479
+Signed-off-by: sub77 <sub77@ymail.com>
+---
+ core/res/res/values/config.xml                     | 25 ++++++++++++++++++++++
+ core/res/res/values/slim_symbols.xml               | 14 ++++++++++++
+ .../android/server/pm/PackageManagerService.java   |  4 ----
+ services/java/com/android/server/SystemServer.java |  3 ---
+ 4 files changed, 39 insertions(+), 7 deletions(-)
+
+diff --git a/core/res/res/values/config.xml b/core/res/res/values/config.xml
+index 8d6ee6f..9492de8 100755
+--- a/core/res/res/values/config.xml
++++ b/core/res/res/values/config.xml
+@@ -2652,4 +2652,29 @@
+     <!-- Boolean to enable stk functionality on Samsung phones -->
+     <bool name="config_samsung_stk">false</bool>
+ 
++    <!-- Quick settings tiles columns and rows config -->
++    <integer name="config_qs_num_rows_landscape_default">2</integer>
++
++    <!-- Hardware keys present on the device, stored as a bit field.
++         This integer should equal the sum of the corresponding value for each
++         of the following keys present:
++             1 - Home
++             2 - Back
++             4 - Menu
++             8 - Assistant (search)
++            16 - App switch
++            32 - Camera
++            64 - Volume rocker
++         For example, a device with Home, Back and Menu keys would set this
++         config to 7. -->
++    <integer name="config_deviceHardwareKeys">64</integer>
++
++    <!-- True if the notifications should dynamically tint the app icon and app title -->
++    <bool name="config_allowNotificationIconTextTinting">true</bool>
++
++    <!-- Whether doze should invert colors for notifications. If the RRO theme causes
++    the NORMAL notification background to be dark and the text to be light, this boolean
++    needs to be set to false, to prevent the doze notifications from being light -->
++    <bool name="config_invert_colors_on_doze">true</bool>
++
+ </resources>
+diff --git a/core/res/res/values/slim_symbols.xml b/core/res/res/values/slim_symbols.xml
+index 5ec344d..9a3186d 100644
+--- a/core/res/res/values/slim_symbols.xml
++++ b/core/res/res/values/slim_symbols.xml
+@@ -25,4 +25,18 @@
+     <java-symbol type="string" name="reboot_system" />
+     <java-symbol type="string" name="reboot_progress" />
+ 
++  <!-- Quick settings tiles columns and rows config -->
++  <java-symbol type="integer" name="config_qs_num_rows_landscape_default"/>
++
++  <!-- Hardware key binding -->
++  <java-symbol type="integer" name="config_deviceHardwareKeys" />
++
++  <!-- Notification icon/text dynamic tint -->
++  <java-symbol type="bool" name="config_allowNotificationIconTextTinting" />
++  <java-symbol type="color" name="notification_text_default_color" />
++  <java-symbol type="color" name="sender_text_color" />
++
++  <!-- Doze invert -->
++  <java-symbol type="bool" name="config_invert_colors_on_doze" />
++
+ </resources>
+diff --git a/services/core/java/com/android/server/pm/PackageManagerService.java b/services/core/java/com/android/server/pm/PackageManagerService.java
+index 4e5c880..b12eef6 100755
+--- a/services/core/java/com/android/server/pm/PackageManagerService.java
++++ b/services/core/java/com/android/server/pm/PackageManagerService.java
+@@ -2379,10 +2379,6 @@ public class PackageManagerService extends IPackageManager.Stub {
+                     scanDirLI(new File(RegionalizationSystemDir, "app"),
+                             PackageParser.PARSE_IS_SYSTEM | PackageParser.PARSE_IS_SYSTEM_DIR,
+                             scanFlags, 0);
+-                    // Collect overlay in <Package>/system/vendor
+-                    scanDirLI(new File(RegionalizationSystemDir, "vendor/overlay"),
+-                            PackageParser.PARSE_IS_SYSTEM | PackageParser.PARSE_IS_SYSTEM_DIR,
+-                            scanFlags | SCAN_TRUSTED_OVERLAY, 0);
+                 }
+             }
+ 
+diff --git a/services/java/com/android/server/SystemServer.java b/services/java/com/android/server/SystemServer.java
+index ae7641a..62b71c1 100644
+--- a/services/java/com/android/server/SystemServer.java
++++ b/services/java/com/android/server/SystemServer.java
+@@ -81,11 +81,8 @@ import com.android.server.media.projection.MediaProjectionManagerService;
+ import com.android.server.net.NetworkPolicyManagerService;
+ import com.android.server.net.NetworkStatsService;
+ import com.android.server.notification.NotificationManagerService;
+-<<<<<<< HEAD
+ import com.android.server.os.RegionalizationService;
+-=======
+ import com.android.server.om.OverlayManagerService;
+->>>>>>> Integrate OverlayManagerService into framework [3/11]
+ import com.android.server.os.SchedulingPolicyService;
+ import com.android.server.pm.BackgroundDexOptService;
+ import com.android.server.pm.Installer;
+-- 
+2.1.4
+
