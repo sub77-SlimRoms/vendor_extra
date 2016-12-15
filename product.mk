@@ -13,8 +13,11 @@ PRODUCT_PACKAGES += \
 
 # Add wanted packages
 PRODUCT_PACKAGES += \
-    LockClock \
-    OpenDelta
+    LockClock
+
+# OpenDelta OTA
+#PRODUCT_PACKAGES += \
+#    OpenDelta
 
 ########################################
 ############# Settings #################
