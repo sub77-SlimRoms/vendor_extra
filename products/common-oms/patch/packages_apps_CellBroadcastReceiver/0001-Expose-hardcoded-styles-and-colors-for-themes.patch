@@ -1,29 +1,27 @@
-From 7b03e868bb8758f46a9b0dda57df55b503670189 Mon Sep 17 00:00:00 2001
-From: Bryan Owens <djbryan3540@gmail.com>
-Date: Fri, 25 Dec 2015 05:07:48 -0600
+From 00e888c8384ae6a7430d30833e6011541011923b Mon Sep 17 00:00:00 2001
+From: sub77 <sub77@ymail.com>
+Date: Fri, 16 Dec 2016 08:16:30 +0000
 Subject: [PATCH] Expose hardcoded styles and colors for themes
 
 Change-Id: I7c83e6c5c728708f8c3bd445529342f8ddbe0f0c
 Signed-off-by: sub77 <sub77@ymail.com>
 ---
- AndroidManifest.xml                                 |  4 ++--
- res/layout/cell_broadcast_alert.xml                 |  4 ++--
- .../cell_broadcast_disallowed_preference_screen.xml |  4 ++--
- res/values/du_colors.xml                            | 21 +++++++++++++++++++++
- res/values/du_styles.xml                            | 21 +++++++++++++++++++++
- 5 files changed, 48 insertions(+), 6 deletions(-)
- create mode 100644 res/values/du_colors.xml
- create mode 100644 res/values/du_styles.xml
+ AndroidManifest.xml                                        | 4 ++--
+ res/layout/cell_broadcast_alert.xml                        | 4 ++--
+ res/layout/cell_broadcast_disallowed_preference_screen.xml | 4 ++--
+ res/values/colors.xml                                      | 4 ++++
+ res/values/styles.xml                                      | 8 ++++++--
+ 5 files changed, 16 insertions(+), 8 deletions(-)
 
 diff --git a/AndroidManifest.xml b/AndroidManifest.xml
-index 03e8cc0..d406021 100644
+index 758dfd8..d406021 100644
 --- a/AndroidManifest.xml
 +++ b/AndroidManifest.xml
 @@ -60,7 +60,7 @@
  
          <activity android:name="CellBroadcastListActivity"
                    android:label="@string/app_label"
--                  android:theme="@android:style/Theme.DeviceDefault.Light"
+-                  android:theme="@android:style/Theme.Material.Light"
 +                  android:theme="@style/CellBroadcastListActivityTheme"
                    android:configChanges="orientation|keyboardHidden"
                    android:launchMode="singleTask">
@@ -32,7 +30,7 @@ index 03e8cc0..d406021 100644
                    android:exported="true" />
  
          <activity android:name="CellBroadcastAlertDialog"
--                  android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"
+-                  android:theme="@android:style/Theme.Material.Light.Dialog"
 +                  android:theme="@style/CellBroadcastAlertDialog"
                    android:launchMode="singleTask"
                    android:exported="false"
@@ -74,61 +72,38 @@ index 613393a..f1a4903 100644
                  android:fadingEdgeLength="16dip" />
  
          <TextView android:id="@+android:id/empty"
-diff --git a/res/values/du_colors.xml b/res/values/du_colors.xml
-new file mode 100644
-index 0000000..b2e58e0
---- /dev/null
-+++ b/res/values/du_colors.xml
-@@ -0,0 +1,21 @@
-+<?xml version="1.0" encoding="utf-8"?>
-+<!--
-+     Copyright (C) 2016 The Pure Nexus Project
+diff --git a/res/values/colors.xml b/res/values/colors.xml
+index afa6eab..253a50c 100644
+--- a/res/values/colors.xml
++++ b/res/values/colors.xml
+@@ -24,5 +24,9 @@
+ 
+     <color name="cell_broadcast_color_primary">#ff263238</color>
+     <color name="cell_broadcast_color_primary_dark">#ff21272b</color>
 +
-+     Licensed under the Apache License, Version 2.0 (the "License");
-+     you may not use this file except in compliance with the License.
-+     You may obtain a copy of the License at
-+
-+          http://www.apache.org/licenses/LICENSE-2.0
-+
-+     Unless required by applicable law or agreed to in writing, software
-+     distributed under the License is distributed on an "AS IS" BASIS,
-+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-+     See the License for the specific language governing permissions and
-+     limitations under the License.
-+-->
-+<resources>
 +    <color name="dialog_divider_color">@android:color/holo_blue_light</color>
 +    <color name="list_container_background_color">@android:color/white</color>
 +    <color name="list_container_cache_color_hint_color">@android:color/white</color>
-+</resources>
-\ No newline at end of file
-diff --git a/res/values/du_styles.xml b/res/values/du_styles.xml
-new file mode 100644
-index 0000000..fae756a
---- /dev/null
-+++ b/res/values/du_styles.xml
-@@ -0,0 +1,21 @@
-+<?xml version="1.0" encoding="utf-8"?>
-+<!--
-+     Copyright (C) 2016 The Pure Nexus Project
-+
-+     Licensed under the Apache License, Version 2.0 (the "License");
-+     you may not use this file except in compliance with the License.
-+     You may obtain a copy of the License at
-+
-+          http://www.apache.org/licenses/LICENSE-2.0
-+
-+     Unless required by applicable law or agreed to in writing, software
-+     distributed under the License is distributed on an "AS IS" BASIS,
-+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-+     See the License for the specific language governing permissions and
-+     limitations under the License.
-+-->
-+<resources>
+ </resources>
+ 
+diff --git a/res/values/styles.xml b/res/values/styles.xml
+index 9bc793b..656edde 100644
+--- a/res/values/styles.xml
++++ b/res/values/styles.xml
+@@ -21,7 +21,11 @@
+ 
+     <!-- This must be a fullscreen theme for the alarm to be able to turn the screen on. -->
+     <style name="AlertFullScreenTheme" parent="android:Theme.Material.Wallpaper.NoTitleBar" />
+-
++    
+     <style name="CellBroadcastSettingsTheme" parent="android:Theme.DeviceDefault.Settings" />
+-
++    
 +    <style name="CellBroadcastListActivityTheme" parent="@android:style/Theme.DeviceDefault.Light" />
-+
++    
 +    <style name="CellBroadcastAlertDialog" parent="@android:style/Theme.DeviceDefault.Light.Dialog" />
-+</resources>
++    
+ </resources>
 -- 
 2.1.4
 
