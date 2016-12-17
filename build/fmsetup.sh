@@ -4,6 +4,8 @@ export CCACHE_DIR=/1and/ccache/SlimRoms
 ccache -M 15G
 
 #PATCHING COMMON
+function patchcommontree()
+{
 for f in `test -d vendor && find -L vendor/extra/products/common*/patch -maxdepth 1 -name 'apply.sh' 2> /dev/null`
 do
     echo " "
@@ -12,6 +14,7 @@ do
     . $f
 done
 unset f
+}
 
 # PATCHING DEVICE
 function patchdevicetree()
@@ -32,6 +35,7 @@ function set_stuff_for_environment()
     set_java_home
     setpaths
     set_sequence_number
+    patchcommontree
     patchdevicetree
 
     # With this environment variable new GCC can apply colors to warnings/errors
